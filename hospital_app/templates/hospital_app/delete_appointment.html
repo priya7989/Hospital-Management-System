@@ -2,16 +2,84 @@
 <html>
 <head>
     <title>Delete Appointment</title>
+    {% load static %} 
+    <style>
+        body {
+            background: url("{% static 'images/background1.jpg' %}") no-repeat center center/cover;
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+            margin-top: 20px;
+        }
+
+        .appointment-details {
+            width: 50%;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .appointment-details p {
+            font-size: 16px;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .appointment-details form {
+            text-align: center;
+        }
+
+        .appointment-details button {
+            width: 100%;
+            padding: 12px;
+            background-color: #e74c3c;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .appointment-details button:hover {
+            background-color: #c0392b;
+        }
+
+        .appointment-details a {
+            display: block;
+            margin-top: 15px;
+            text-align: center;
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        .appointment-details a:hover {
+            text-decoration: underline;
+        }
+    </style>
 </head>
 <body>
+
+<div class="appointment-details">
     <h2>Are you sure you want to delete this appointment?</h2>
     <p>Patient: {{ appointment.patient.name }}</p>
     <p>Doctor: {{ appointment.doctor.name }}</p>
     <p>Date: {{ appointment.date }}</p>
+    
     <form method="post">
         {% csrf_token %}
         <button type="submit">Yes, Delete</button>
     </form>
+    
     <a href="{% url 'appointment_list' %}">Cancel</a>
+</div>
+
 </body>
 </html>

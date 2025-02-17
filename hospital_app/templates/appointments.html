@@ -2,12 +2,107 @@
 <html>
 <head>
     <title>Appointment List</title>
-    
+    {%load static%}
+    <style>
+        body {
+            background: url("{% static 'images/background1.jpg' %}") no-repeat center center/cover;
+            font-family: 'Arial', sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+            margin-top: 30px;
+            font-size: 28px;
+        }
+
+        a {
+            text-decoration: none;
+            color: #007bff;
+            font-weight: bold;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 30px auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+
+        .add-appointment {
+            text-align: right;
+            margin-bottom: 20px;
+        }
+
+        .add-appointment a {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        .add-appointment a:hover {
+            background-color: #45a049;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        tr:hover {
+            background-color: #ddd;
+        }
+
+        td a {
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        td a:hover {
+            text-decoration: underline;
+        }
+
+    </style>
 </head>
 <body>
+
+<div class="container">
     <h2>Appointments</h2>
-    <a href="{% url 'add_appointment' %}">Add Appointment</a>
-    <table border="1">
+
+    <div class="add-appointment">
+        <a href="{% url 'add_appointment' %}">Add Appointment</a>
+    </div>
+
+    <table>
         <tr>
             <th>Patient</th>
             <th>Doctor</th>
@@ -26,10 +121,10 @@
             <td>{{ appointment.doctor.name }}</td>
             <td>{{ appointment.date }}</td>
             <td>{{ appointment.fee }}</td>
-            <td>{{ appointment.patient.bp }}</td>  <!-- Added BP -->
-            <td>{{ appointment.patient.gender }}</td>  <!-- Added Gender -->
-            <td>{{ appointment.patient.height }}</td>  <!-- Added Height -->
-            <td>{{ appointment.patient.weight }}</td>  <!-- Added Weight -->
+            <td>{{ appointment.patient.bp }}</td>
+            <td>{{ appointment.patient.gender }}</td>
+            <td>{{ appointment.patient.height }}</td>
+            <td>{{ appointment.patient.weight }}</td>
             <td>{{ appointment.status }}</td>
             <td>
                 <a href="{% url 'update_appointment' appointment.id %}">Edit</a> | 
@@ -38,5 +133,7 @@
         </tr>
         {% endfor %}
     </table>
+</div>
+
 </body>
 </html>

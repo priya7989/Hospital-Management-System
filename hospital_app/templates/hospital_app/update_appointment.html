@@ -4,19 +4,87 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Update Appointment</title>
-    <link rel="stylesheet" type="text/css" href="{% static 'hospital_app/styles.css' %}">
+    
+    {% load static %}  <!-- Load static files -->
+
+    <style>
+        body {
+            background: url("{% static 'images/background1.jpg' %}") no-repeat center center/cover;
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+
+        .appointment-form {
+            width: 50%;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .appointment-form label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .appointment-form input,
+        .appointment-form select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .appointment-form button {
+            width: 100%;
+            padding: 12px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .appointment-form button:hover {
+            background-color: #45a049;
+        }
+
+        .appointment-form a {
+            display: block;
+            margin-top: 15px;
+            text-align: center;
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        .appointment-form a:hover {
+            text-decoration: underline;
+        }
+    </style>
 </head>
 <body>
 
-<h2>Update Appointment</h2>
-
-<form method="POST">
-    {% csrf_token %}
-    {{ form.as_p }}  <!-- Render the form fields here -->
-    <button type="submit">Update Appointment</button>
-</form>
-
-<a href="{% url 'appointment_list' %}">Cancel</a>
+<div class="appointment-form">
+    <h2>Update Appointment</h2>
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Update Appointment</button>
+    </form>
+    <a href="{% url 'appointment_list' %}">Cancel</a>
+</div>
 
 </body>
 </html>
