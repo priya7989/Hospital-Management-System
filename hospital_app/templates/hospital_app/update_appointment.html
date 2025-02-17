@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Appointment</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'hospital_app/styles.css' %}">
+</head>
+<body>
+
+<h2>Update Appointment</h2>
+
+<form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}  <!-- Render the form fields here -->
+    <button type="submit">Update Appointment</button>
+</form>
+
+<a href="{% url 'appointment_list' %}">Cancel</a>
+
+</body>
+</html>

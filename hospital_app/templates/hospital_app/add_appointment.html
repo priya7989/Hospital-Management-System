@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add New Appointment</title>
+</head>
+<body>
+    <h2>Add New Appointment</h2>
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}  <!-- Automatically renders all the fields, including patient and appointment fields -->
+
+        <button type="submit">Save</button>
+    </form>
+
+    <a href="{% url 'appointment_list' %}">Back to Appointments</a>
+</body>
+</html>
