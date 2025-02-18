@@ -1,0 +1,32 @@
+<!-- templates/hospital_app/edit_patient.html -->
+{% load static %} 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Patient</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+
+<div class="container">
+    <h2>Edit Patient</h2>
+
+    <form method="POST">
+        {% csrf_token %}
+        <input type="text" name="name" value="{{ patient.name }}" required>
+        <input type="number" name="age" value="{{ patient.age }}" required>
+        <select name="gender" required>
+            <option value="Male" {% if patient.gender == "Male" %}selected{% endif %}>Male</option>
+            <option value="Female" {% if patient.gender == "Female" %}selected{% endif %}>Female</option>
+        </select>
+        <input type="text" name="contact" value="{{ patient.contact }}" required>
+        <textarea name="medical_history" required>{{ patient.medical_history }}</textarea>
+        <input type="text" name="doctor" value="{{ patient.doctor }}" required>
+        <button type="submit">Update Patient</button>
+    </form>
+</div>
+
+</body>
+</html>

@@ -9,7 +9,7 @@ class PatientForm(forms.ModelForm):
 class DoctorForm(forms.ModelForm):
     class Meta:
         model = Doctor
-        fields = '__all__'
+        fields = ['name', 'specialization', 'experience', 'contact', 'room_number']
 
 
 class AppointmentForm(forms.ModelForm):
@@ -34,21 +34,26 @@ class AppointmentForm(forms.ModelForm):
                   'patient_weight', 'patient_bp', 'problem', 'doctor', 'date', 'fee', 'status']  # Added 'problem'
 
     def save(self, commit=True):
-        # Create a new Patient instance
-        patient = Patient.objects.create(
+        # Check if the patient already exists in the system by phone or other unique field
+        patient, created = Patient.objects.get_or_create(
             name=self.cleaned_data['patient_name'],
-            age=self.cleaned_data['patient_age'],
-            gender=self.cleaned_data['patient_gender'],
-            phone=self.cleaned_data['patient_phone'],
-            height=self.cleaned_data['patient_height'],
-            weight=self.cleaned_data['patient_weight'],
-            bp=self.cleaned_data['patient_bp'],
+            phone=self.cleaned_data['patient_phone'],  # You can change this field to your preferred unique identifier
+            defaults={
+                'age': self.cleaned_data['patient_age'],
+                'gender': self.cleaned_data['patient_gender'],
+                'height': self.cleaned_data['patient_height'],
+                'weight': self.cleaned_data['patient_weight'],
+                'bp': self.cleaned_data['patient_bp'],
+            }
         )
 
-        # Create an Appointment instance and assign the new patient
+        # Now create the Appointment and link it to the patient
         appointment = super().save(commit=False)
-        appointment.patient = patient
+        appointment.patient = patient  # Assign the patient (either new or existing) to the appointment
         appointment.problem = self.cleaned_data['problem']  # Save the problem/symptoms description
+        appointment.doctor = self.cleaned_data['doctor'] 
         if commit:
-            appointment.save()
+            appointment.save()  # Commit the changes to the database
+        
+        appointment.doctor.patients.add(patient)
         return appointment

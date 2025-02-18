@@ -1,0 +1,98 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Doctor</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            text-align: center;
+            padding: 20px;
+        }
+
+        h2 {
+            color: #333;
+        }
+
+        form {
+            background: white;
+            padding: 20px;
+            margin: 20px auto;
+            width: 50%;
+            border-radius: 5px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            display: block;
+            margin: 10px 0 5px;
+            font-weight: bold;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        .button {
+            padding: 10px 20px;
+            background-color: #0073e6;
+            color: white;
+            border: none;
+            cursor: pointer;
+            text-decoration: none;
+            font-size: 16px;
+            margin-top: 10px;
+            display: inline-block;
+        }
+
+        .button:hover {
+            background-color: #005bb5;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Add Doctor</h2>
+
+    <form method="post">
+        {% csrf_token %}
+
+        <label for="id_name">Doctor's Name:</label>
+        <input type="text" name="name" id="id_name" required>
+
+        <label for="id_specialization">Specialization:</label>
+        <select name="specialization" id="id_specialization" required>
+            <option value="">Select Specialization</option>
+            <option value="Cardiologist">Cardiologist</option>
+            <option value="Dermatologist">Dermatologist</option>
+            <option value="Pediatrician">Pediatrician</option>
+            <option value="Orthopedic">Orthopedic</option>
+            <option value="General Physician">General Physician</option>
+            <option value="Neurologist">Neurologist</option>
+            <option value="Psychiatrist">Psychiatrist</option>
+        </select>
+
+        <label for="id_experience">Years of Experience:</label>
+        <input type="number" name="experience" id="id_experience" required>
+
+        <label for="id_contact">Contact Number:</label>
+        <input type="text" name="contact" id="id_contact" required>
+
+        <label for="id_room_number">Allotted Room/Clinic:</label>
+        <input type="text" name="room_number" id="id_room_number">
+
+        <button type="submit" class="button">Add Doctor</button>
+    </form>
+
+    <a href="{% url 'doctor_list' %}" class="button">Back to Doctor List</a>
+
+</body>
+</html>
